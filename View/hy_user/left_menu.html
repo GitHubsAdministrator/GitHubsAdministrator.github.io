@@ -1,0 +1,80 @@
+<div class="aside">
+    <div class="user-avatar">
+        <a href="{if IS_LOGIN}{if $data['uid'] == $user['uid']}{php HYBBS_URL('my',$data['user'],'op');}{else}javascript:;{/if}{else}javascript:;{/if}">
+            <img src="{#WWW}{$data.avatar.a}" class="avatar avatar-200" height="200" width="200">
+        </a>
+        <h3 style="margin-bottom: 5px">
+            <font color="{$usergroup[$data['gid']]['font_color']}" style="{$usergroup[$data['gid']]['font_css']}" >{$usergroup[$data['gid']]['name']}</font>
+        </h3>
+        <h2>{$data.user}</h2>
+        <?php 
+            $now_credits_bfb = ($data['credits'] / $usergroup[$data['gid']]['credits_max']) * 100;
+            $update_title = '距离下个等级还需要：'.($usergroup[$data['gid']]['credits_max'] - $data['credits']).' 积分';
+            if($now_credits_bfb >100){
+                $now_credits_bfb = 100;
+            }
+            if($usergroup[$data['gid']]['credits'] == -1 || $usergroup[$data['gid']]['credits_max'] == -1){
+                $update_title = '你所在用户组无法靠积分升级';
+                $now_credits_bfb = 0;
+            }
+            
+            
+            ?>
+        <div class="progress" title="{$update_title}">
+            <span class="progress-bk"></span>
+            <span class="progress-bar" style="width: {$now_credits_bfb}%"></span>
+        </div>
+        <div id="num-info">
+            <!--{hook t_user_left_menu_3}-->
+            <div>
+                <span class="num">{$data.follow}</span><span class="text">{$_LANG['关注数量']}</span>
+            </div>
+            <div>
+                <span class="num">{$data.fans}</span><span class="text">{$_LANG['粉丝数量']}</span>
+            </div>
+            <div>
+                <span class="num">{$data.threads}</span><span class="text">{$_LANG['文章数量']}</span>
+            </div>
+            <!--{hook t_user_left_menu_4}-->
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="menus">
+        <ul>
+
+            <!--{hook t_user_left_menu_1}-->
+            <li class="tab-index {if in_array($method,['index']) !== false}active{/if}">
+
+            <a href="{php HYBBS_URL('my',$data['user']);}"><i class="icon icon-home1"></i>{$_LANG['首页中心']}</a>
+            </li>
+            <li class="tab-post {if in_array($method,['thread','post']) !== false}active{/if}">
+            <a href="{php HYBBS_URL('my',$data['user'],'thread');}"><i class="icon icon-post"></i>我的帖子</a>
+            </li>
+            
+            {if IS_LOGIN}
+                {if $data['uid'] == $user['uid']}
+                    <li class="tab-profile {if in_array($method,['op','log','file']) !== false}active{/if}">
+                    <a href="{php HYBBS_URL('my',$data['user'],'op');}"><i class="icon icon-user-info"></i>我的信息</a>
+                    </li>
+                    <li class="tab-profile {if in_array($method,['message']) !== false}active{/if}">
+                    <a href="{php HYBBS_URL('my',$data['user'],['message'=>'index']);}"><i class="icon icon-message2"></i>我的消息</a>
+                    </li>
+                {/if}
+                {if NOW_GID == C("ADMIN_GROUP")}
+                    <li class="tab-message">
+                    <a href="{php HYBBS_URL('admin');}"><i class="icon icon-admin"></i>{$_LANG['管理后台']}</a>
+                    </li>
+                {/if}
+            {/if}
+            <!--{hook t_user_left_menu_2}-->
+        </ul>
+    </div>
+    <a href="{#WWW}" style="
+     bottom: 0;
+    position: absolute;
+    font-size: 16px;
+    padding: 10px;
+    left: 0;
+"><i class="fa fa-sign-out"></i> {$_LANG['返回网站首页']}</a>
+</div>
