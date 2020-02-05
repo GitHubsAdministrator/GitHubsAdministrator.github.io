@@ -1,1 +1,0 @@
-<?php die(); ?>file_put_contents(D:/phpstudy_pro/WWW/test/Tmp/Admin_f96ff8be27366a346ce77875ceace8c8.php): 未能打开流:拒绝访问,请给予目录权限  #发生错误的文件位于: D:\phpstudy_pro\WWW\test\HY\Lib\Hook.php #行数: 151 #发生时间: 2020-01-15 11:53:19 ##发生URL: 127.0.0.1/test/?admin/getip.html
