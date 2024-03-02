@@ -1,0 +1,1 @@
+var posts=["2023/10/05/TEST/","2023/10/08/how to be a good English learner/","2023/12/10/mikutap-promotion/","2023/12/09/在线网络安全工具/"];function toRandomPost(){pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);};
